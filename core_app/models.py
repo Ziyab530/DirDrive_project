@@ -1,7 +1,9 @@
 from django.db import models
 from django.utils import timezone
+from django.conf import settings
 from Biker_app.models import Biker
 from users_app.models import User
+import googlemaps
 
 
 class Ride(models.Model):
@@ -28,7 +30,9 @@ class Ride(models.Model):
     payment_method = models.CharField(max_length=20, choices=PAYMENT_METHOD_CHOICES)
 
     def __str__(self):
-        return f"Ride #{self.id} - {self.user.username} with {self.biker.full_name}"
+        return f"Request from {self.user.username} to {self.biker.full_name} - {self.status}"
+    
+   
 
 
 
@@ -101,4 +105,16 @@ class History(models.Model):
 
     def __str__(self):
         return f"History for Ride {self.rideId} by {self.user.username}"
+
+class price_info(models.Model):
+    price_id = models.CharField(max_length=100)
+    pickup_location = models.CharField(max_length=250)
+    dropoff_location = models.CharField(max_length=250)
+    price = models.CharField(max_length=250)
+    def __str__(self):
+        return f"price info for Ride {self.peice_id} by {self.user.username}"
+    
+
+    
+
 

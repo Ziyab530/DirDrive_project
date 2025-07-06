@@ -1,5 +1,5 @@
 import django_filters
-from .models import Ride, RideRequest, Transaction, Rating, History
+from .models import Ride, RideRequest, Transaction, Rating, History,price_info
 
 
 class RideFilter(django_filters.FilterSet):
@@ -46,3 +46,11 @@ class HistoryFilter(django_filters.FilterSet):
     class Meta:
         model = History
         fields = ['user', 'ride', 'status', 'date']
+class price_infoFilter(django_filters.FilterSet):
+     status = django_filters.CharFilter(lookup_expr='iexact')
+     date = django_filters.DateFromToRangeFilter()
+    
+     class Meta :
+         model = price_info
+         fields = ['price_id','price']
+         

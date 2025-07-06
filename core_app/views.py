@@ -1,11 +1,11 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from .models import Ride,RideRequest,Transaction,Rating,History
-from .serializers import RideSerializer,RideRequestSerializer,TransactionSerializer,RatingSerializer,HistorySerializer
+from .models import Ride,RideRequest,Transaction,Rating,History,price_info
+from .serializers import RideSerializer,RideRequestSerializer,TransactionSerializer,RatingSerializer,HistorySerializer,price_infoSerializer
 from rest_framework.permissions import IsAuthenticated
 from .filters import (
     RideFilter, RideRequestFilter, TransactionFilter,
-    RatingFilter, HistoryFilter
+    RatingFilter, HistoryFilter,price_infoFilter
 )
 from django_filters.rest_framework import DjangoFilterBackend
 
@@ -46,3 +46,8 @@ class HistoryViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+class price_infoViewSet(viewsets.ModelViewSet):
+    queryset = price_info.objects.all()
+    serializer_class = price_infoSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = price_infoFilter

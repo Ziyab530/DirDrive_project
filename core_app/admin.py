@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Ride,RideRequest,Transaction,Rating,History
+from .models import Ride,RideRequest,Transaction,Rating,History,price_info
 
 @admin.register(Ride)
 class RideAdmin(admin.ModelAdmin):
@@ -30,3 +30,4 @@ class HistoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'user', 'ride', 'status', 'date', 'pickup', 'dropoff', 'amount')
     search_fields = ('rideId', 'user__username', 'pickup', 'dropoff')
     list_filter = ('status', 'date')
+admin.site.register(price_info)    
